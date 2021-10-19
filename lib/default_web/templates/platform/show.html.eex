@@ -1,0 +1,13 @@
+<h1>Show Platform</h1>
+
+<ul>
+
+  <li>
+    <strong>Platform:</strong>
+    <%= @platform.platform %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.platform_path(@conn, :edit, @platform) %></span>
+<span><%= link "Back", to: Routes.platform_path(@conn, :index) %></span>

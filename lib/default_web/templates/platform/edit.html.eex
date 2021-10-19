@@ -1,0 +1,5 @@
+<h1>Edit Platform</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.platform_path(@conn, :update, @platform)) %>
+
+<span><%= link "Back", to: Routes.platform_path(@conn, :index) %></span>
