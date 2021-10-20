@@ -6,6 +6,8 @@ defmodule Default.Games.Game do
     field :month, :string
     field :game, :string
     field :status, :string
+    belongs_to :publisher, Default.Publishers.Publisher
+    has_many :platform, Default.Platforms.Platform
 
     timestamps()
   end

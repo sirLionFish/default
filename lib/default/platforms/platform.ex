@@ -4,6 +4,7 @@ defmodule Default.Platforms.Platform do
 
   schema "platforms" do
     field :platform, :string
+    belongs_to :game, Default.Games.Game
 
     timestamps()
   end

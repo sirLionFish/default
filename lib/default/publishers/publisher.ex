@@ -6,6 +6,7 @@ defmodule Default.Publishers.Publisher do
     field :founded, :string
     field :location, :string
     field :publisher, :string
+    has_many :games, Default.Games.Game
 
     timestamps()
   end
