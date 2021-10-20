@@ -16,7 +16,9 @@ defmodule DefaultWeb.Router do
 
   scope "/", DefaultWeb do
     pipe_through :browser
-
+    resources "/publishers", PublisherController
+    resources "/games", GameController
+    resources "/platforms", PlatformController
     live "/", PageLive, :index
   end
 
