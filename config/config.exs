@@ -7,6 +7,12 @@
 # General application configuration
 use Mix.Config
 
+config :default, Default.Repo,
+  database: "default_repo",
+  username: "user",
+  password: "pass",
+  hostname: "localhost"
+
 config :default,
   ecto_repos: [Default.Repo]
 
