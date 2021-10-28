@@ -14,11 +14,20 @@ defmodule DefaultWeb.Router do
     plug :accepts, ["json"]
   end
 
+    scope "/api", DefaultWeb.Api, as: :api do
+    pipe_through :api
+
+    resources("/publisher", PublisherController, only: [:index]) do
+      resources("/games", GameController, only: [:index])
+    end
+  end
+
   scope "/", DefaultWeb do
     pipe_through :browser
-    resources "/publishers", PublisherController
-    resources "/games", GameController
-    resources "/platforms", PlatformController
+    resources "/publishers", PublisherController do
+      resources "/games", GameController
+    end
+     resources "/platforms", PlatformController
     live "/", PageLive, :index
   end
 

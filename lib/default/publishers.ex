@@ -4,28 +4,32 @@ defmodule Default.Publishers do
   alias Default.Repo
   alias Default.Publishers.Publisher
 
-  def list_publishers do
+  def list_all do
     Repo.all(Publisher)
   end
 
-  def get_publisher!(id), do: Repo.get!(Publisher, id)
+  def get(id) do
+    pub = Repo.get!(Publisher, id)
+    Repo.preload(pub, :games)
+  end
 
-  def create_publisher(attrs \\ %{}) do
+
+  def new(attrs \\ %{}) do
     %Publisher{}
     |> Publisher.changeset(attrs)
     |> Repo.insert()
   end
-  def update_publisher(%Publisher{} = publisher, attrs) do
+  def update(%Publisher{} = publisher, attrs) do
     publisher
     |> Publisher.changeset(attrs)
     |> Repo.update()
   end
 
-  def delete_publisher(%Publisher{} = publisher) do
+  def delete(%Publisher{} = publisher) do
     Repo.delete(publisher)
   end
 
-  def change_publisher(%Publisher{} = publisher, attrs \\ %{}) do
+  def change(%Publisher{} = publisher, attrs \\ %{}) do
     Publisher.changeset(publisher, attrs)
   end
 end

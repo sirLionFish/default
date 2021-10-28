@@ -4,18 +4,30 @@ defmodule Default.Games do
   alias Default.Repo
 
   alias Default.Games.Game
+  alias Default.Publishers.Publisher
 
   def list_games do
     Repo.all(Game)
   end
 
-  def get_game!(id), do: Repo.get!(Game, id)
+  def get_game!(id) do
+    pub = Repo.get!(Game, id)
+    Repo.preload(pub, :games)
+  end
 
-  def create_game(attrs \\ %{}) do
-    %Game{}
+  def create(attrs, id) do
+    pub = Repo.get(Publisher, id)
+    Ecto.build_assoc(pub, :games, attrs)
     |> Game.changeset(attrs)
     |> Repo.insert()
   end
+
+  # def create(%Publisher{} = pub, attrs \\ %{}) do
+  #   pub
+  #   |> Ecto.build_assoc(:games)
+  #   |> Game.changeset(attrs)
+  #   |> Repo.insert()
+  # end
 
   def update_game(%Game{} = game, attrs) do
     game

@@ -1,10 +1,9 @@
 <h1>Show Game</h1>
 
 <ul>
-
   <li>
     <strong>Name:</strong>
-    <%= @game.name %>
+    <%= @game.game %>
   </li>
 
   <li>
@@ -19,5 +18,5 @@
 
 </ul>
 
-<span><%= link "Edit", to: Routes.game_path(@conn, :edit, @game) %></span>
-<span><%= link "Back", to: Routes.game_path(@conn, :index) %></span>
+<span><%= link "Edit", to: Routes.publisher_game_path(@conn, :edit, @game) %></span>
+<span><%= link "Back", to: Routes.publisher_game_path(@conn, :index, @game) %></span>

@@ -32,7 +32,7 @@ defmodule Default.GamesTest do
     test "create_game/1 with valid data creates a game" do
       assert {:ok, %Game{} = game} = Games.create_game(@valid_attrs)
       assert game.month == "some month"
-      assert game.name == "some name"
+      assert game.game == "some game"
       assert game.status == "some status"
     end
 
@@ -44,7 +44,7 @@ defmodule Default.GamesTest do
       game = game_fixture()
       assert {:ok, %Game{} = game} = Games.update_game(game, @update_attrs)
       assert game.month == "some updated month"
-      assert game.name == "some updated name"
+      assert game.game == "some updated game"
       assert game.status == "some updated status"
     end
 

@@ -3,7 +3,7 @@ defmodule Default.Repo.Migrations.CreateGames do
 
   def change do
     create table(:games) do
-      add :name, :string
+      add :game, :string
       add :month, :string
       add :status, :string
       add :publisher_id, references(:publishers, on_delete: :restrict), null: false
@@ -11,6 +11,6 @@ defmodule Default.Repo.Migrations.CreateGames do
       timestamps()
     end
 
-    create index(:rooms, [:publisher_id])
+    create index(:games, [:publisher_id])
   end
 end

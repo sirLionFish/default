@@ -5,7 +5,7 @@ defmodule Default.Repo.Migrations.CreatePublishers do
     create table(:publishers) do
       add :publisher, :string
       add :location, :string
-      add :founded, :string
+      add :founded, :integer
 
       timestamps()
     end
