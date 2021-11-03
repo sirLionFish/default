@@ -1,0 +1,40 @@
+
+<%# search %>
+<div class="flex items-center py-8 px-4">
+  <div class="flex flex-col">
+    <%= form_for @conn, Routes.publisher_path(@conn, :index), [method: :get], fn f -> %>
+      <%= search_input f, :query, placeholder: "Search...", class: "text-gray-600 focus:outline-none w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border shadow" %>
+  </div>
+  <div class="px-6 flex flex-wrap">
+    <%= submit "Search", class: "mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-8 py-2.5 text-sm"%>
+  </div>
+    <% end %>
+</div>
+
+ <%# Publisher content %>
+ <h1 class="text-2xl font-bold text-gray-800 pl-5 pt-10">Listing Publishers</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Publisher</th>
+      <th>Year</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= for publisher <- @publishers do %>
+    <tr>
+      <td><%= publisher.publisher %></td>
+      <td><%= publisher.year %></td>
+      <td><%= publisher.location %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.publisher_path(@conn, :show, publisher) %></span>
+        <span><%= link "Edit", to: Routes.publisher_path(@conn, :edit, publisher) %></span>
+        <span><%= link "Delete", to: Routes.publisher_path(@conn, :delete, publisher), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<span><%= link "New Publisher", to: Routes.publisher_path(@conn, :new) %></span>

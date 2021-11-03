@@ -1,49 +1,22 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <h1 class="text-indigo-500 text-3xl font-bold ml-9">add some style</h1>
-  <p>Peace of mind from prototype to production</p>
-
-  <form phx-change="suggest" phx-submit="search">
-    <input type="text" name="q" value="<%= @query %>" placeholder="Live dependency search" list="results" autocomplete="off"/>
-    <datalist id="results">
-      <%= for {app, _vsn} <- @results do %>
-        <option value="<%= app %>"><%= app %></option>
-      <% end %>
-    </datalist>
-    <button type="submit" phx-disable-with="Searching...">Go to Hexdocs</button>
-  </form>
-</section>
-
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.5/CHANGELOG.md">v1.5 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-      <li>
-        <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
-      </li>
-    </ul>
-  </article>
-</section>
+<div class="mx-auto container">
+  <div class="flex w-full flex-col items-center justif-center py-16 xl:px-0 px-4">
+    <h1 class="lg:text-6xl text-3xl text-indigo-700 font-bold text-center">tailwind working?</h1>
+    <h2 class="lg:text-2xl text-lg text-gray-600 mt-6 text-centerlg:mb-0 mb-4">Peace of mind from prototype to production</h2>
+    <div class="flex flex-col w-full sm:w-1/2 md:ml-4 mt-3 md:mt-10">
+      <div class="relative w-full">
+        <form phx-change="suggest" phx-submit="search">
+          <input type="text" name="q" value="<%= @query %>" class="w-full text-text-gray-600 focus:outline-none focus:border font-normal pl-16 pr-24 lg:py-5 py-2 flex items-center text-2xl border-gray-300 rounded border relative z-10" placeholder="Dependency search..." list="results" autocomplete="on"/>
+          <datalist id="results">
+            <%= for {app, _vsn} <- @results do %>
+              <option value="<%= app %>"><%= app %></option>
+            <% end %>
+          </datalist>
+          <div class="sm:flex justify-center items-center pt-12">
+            <button type="submit" phx-disable-with="Searching..."  class="w-full sm:w-auto py-4 px-8 bg-indigo-700 text-white lg:text-2xl  border border-indigo-700 hover:opacity-75 text-lg mr-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700">Go to Hexdocs</button>
+            <button class="w-full sm:w-auto mt-4 sm:mt-0 py-4 px-8 bg-transparent border border-indigo-700 text-indigo-700 text-text-indigo-700 hover:opacity-75 lg:text-2xl text-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700">Advance Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

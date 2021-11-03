@@ -1,0 +1,29 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="flex lg:flex-row flex-col items-center py-8 px-4">
+    <div class="flex flex-col lg:mr-16">
+      <%= label f, :publisher, class: "text-gray-800 text-sm font-bold leading-tight tracking-normal mb-2"%>
+      <%= text_input f, :publisher, class: "text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 bg-white font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border shadow"%>
+      <%= error_tag f, :publisher %>
+    </div>
+    <div class="flex flex-col lg:mr-16 lg:py-0 py-4">
+      <%= label f, :year, class: "text-gray-400 text-sm font-bold leading-tight tracking-normal mb-2" %>
+      <%= number_input f, :year,  class: "text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 bg-white font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border shadow"%>
+      <%= error_tag f, :year %>
+    </div>
+    <div class="flex flex-col lg:py-0 py-4">
+      <%= label f, :location, class: "lg:pt-4 text-gray-400 text-sm font-bold leading-tight tracking-normal mb-2"%>
+      <%= text_input f, :location, class: "text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 bg-white font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border shadow"%>
+      <%= error_tag f, :location %>
+    </div>
+
+    <div class="px-6 pt-10 flex flex-wrap">
+      <%= submit "Save", class: "mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-8 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-indigo-600"%>
+    </div>
+  </div>
+<% end %>
