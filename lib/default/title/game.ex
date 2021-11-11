@@ -17,6 +17,7 @@ defmodule Default.Title.Game do
     |> cast(attrs, [:game, :month, :status])
     |> validate_required([:game, :month, :status])
     |> validate_months()
+    |> validate_status()
   end
 
   @all_months ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -27,6 +28,17 @@ defmodule Default.Title.Game do
 
     else
       add_error(changeset, :month, "Not a month; check spelling or proper capitalization")
+    end
+  end
+
+  @game_state ["Released", "Unrelease"]
+  def validate_status(changeset) do
+    status = get_field(changeset, :status)
+    if status in @game_state do
+      changeset
+
+    else
+      add_error(changeset, :status, "Not a status; check spelling or proper capitalization")
     end
   end
 end

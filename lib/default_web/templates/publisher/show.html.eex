@@ -51,21 +51,34 @@
           <%= text_input f, :status, class: "w-full p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 text-sm font-medium leading-none text-gray-800"%>
           <%= error_tag f, :status %>
         </div>
+        <div class="px-6 pt-10 flex flex-wrap">
+          <%= submit "Add", class: "mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-8 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-indigo-600"%>
+        </div>
       </div>
     <% end %>
   </div>
+
   <%# Game content Starts here %>
-  <div class="flex items-center">
-    <div class="pl-3">
-      <div class="flex items-center text-sm leading-none">
-        <%= for game <- @publisher.games do %>
-          <p class="font-semibold text-gray-800 pl-3"><%= game.game %></p>
-          <p class="font-semibold text-gray-800 pl-3"><%= game.month %></p>
-          <p class="font-semibold text-gray-800 pl-3"><%= game.status %></p>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  </div>
+  <table class="xl:w-5/12 w-11/12 mx-auto mb-4 my-6 md:w-2/3 shadow sm:px-10 px-4 py-6 rounded-md">
+    <tbody class="w-full">
+      <%= for game <- @publisher.games do %>
+        <tr class="focus:outline-none h-20 text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100">
+          <td class="text-gray-600 mt-2"><div class="flex items-center">
+            <div class="pl-4">
+              <p class="font-medium"><%= game.game %></p>
+            </div>
+          </td>
+          <td class="text-gray-600 mt-2"><%= game.month %></td>
+          <td class="text-gray-600 mt-2"><%= game.status %></td>
+          <%# <td class="flex items-start mt-10 mb-8 sm:ml-10">
+            <div  class="border flex bg-white text-gray-500 shadow rounded">
+              <button class="py-3 px-5 flex items-center justify-center text-xs focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-300 focus:ring-gray-800 rounded">Show</button>
+              <button class="py-3 px-5 flex items-center justify-center text-xs focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-300 focus:ring-gray-800 rounded border border-l border-r-0 border-b-0 border-t-0 border-indigo-100">Edit</button>
+              <button class="py-3 px-5 flex items-center justify-center text-xs focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-300 focus:ring-gray-800 rounded border border-l border-r-0 border-b-0 border-t-0 border-indigo-100"><%= link "Delete", to: Routes.publisher_path(@conn, :delete, game), method: :delete, data: [confirm: "Are you sure?"] %></button>
+            <%# </div>
+          </td> %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-<%# hi %>

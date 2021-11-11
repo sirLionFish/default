@@ -1,40 +1,60 @@
 
-<%# search %>
-<div class="flex items-center py-8 px-4">
-  <div class="flex flex-col">
-    <%= form_for @conn, Routes.publisher_path(@conn, :index), [method: :get], fn f -> %>
-      <%= search_input f, :query, placeholder: "Search...", class: "text-gray-600 focus:outline-none w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border shadow" %>
-  </div>
-  <div class="px-6 flex flex-wrap">
-    <%= submit "Search", class: "mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-8 py-2.5 text-sm"%>
-  </div>
-    <% end %>
-</div>
-
- <%# Publisher content %>
- <h1 class="text-2xl font-bold text-gray-800 pl-5 pt-10">Listing Publishers</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Publisher</th>
-      <th>Year</th>
-      <th>Location</th>
-    </tr>
-  </thead>
-  <tbody>
-  <%= for publisher <- @publishers do %>
-    <tr>
-      <td><%= publisher.publisher %></td>
-      <td><%= publisher.year %></td>
-      <td><%= publisher.location %></td>
-
-      <td>
-        <span><%= link "Show", to: Routes.publisher_path(@conn, :show, publisher) %></span>
-        <span><%= link "Edit", to: Routes.publisher_path(@conn, :edit, publisher) %></span>
-        <span><%= link "Delete", to: Routes.publisher_path(@conn, :delete, publisher), method: :delete, data: [confirm: "Are you sure?"] %></span>
-      </td>
-    </tr>
+  <%# search %>
+  <%= form_for @conn, Routes.publisher_path(@conn, :index), [method: :get], fn f -> %>
+    <div class="flex items-center py-8 px-4 pr-2">
+      <div class="flex flex-col">
+          <%= search_input f, :query, placeholder: "Search...", class: "text-gray-600 focus:outline-none w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border shadow" %>
+      </div>
+      <div class="px-6 flex flex-wrap">
+        <%= submit "Search", class: "mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-8 py-2.5 text-sm"%>
+      </div>
+    </div>
   <% end %>
-  </tbody>
-</table>
-<span><%= link "New Publisher", to: Routes.publisher_path(@conn, :new) %></span>
+
+  <%# Publisher content %>
+  <div class="w-full sm:px-6">
+    <div class="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
+      <div class="sm:flex items-center justify-between">
+        <p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">Publishers</p>
+        <div>
+          <button class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
+            <p class="text-sm font-medium leading-none text-white"><%= link "New Publisher", to: Routes.publisher_path(@conn, :new) %></p>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto">
+      <table class="w-full whitespace-nowrap">
+        <thead>
+          <tr tabindex="0" class="focus:outline-none h-16 w-full leading-none text-gray-800 text-lg">
+            <th class="text-left pl-4 font-bold">Publisher</th>
+            <th class="text-left pl-12">Year</th>
+            <th class="text-left pl-12">Location</th>
+          </tr>
+        </thead>
+        <%= for publisher <- @publishers do %>
+        <tbody class="w-full">
+          <tr tabindex="0" class="focus:outline-none h-20 text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100">
+            <td class="pl-4 cursor-pointer">
+              <div class="flex items-center">
+                <div class="pl-4">
+                  <p class="font-medium"><%=  link publisher.publisher, to: Routes.publisher_path(@conn, :show, publisher) %></p>
+                </div>
+              </div>
+            </td>
+            <td class="pl-12">
+              <p class=" leading-3 text-gray-600 mt-2"><%= publisher.year %></p>
+            </td>
+            <td class="pl-12">
+              <p class=" text-gray-600 mt-2"><%= publisher.location %></p>
+            </td>
+            <td>
+              <span><%= link "Edit", to: Routes.publisher_path(@conn, :edit, publisher), class: "focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:outline-none mx-2 my-2 bg-white transition duration-150 ease-in-out hover:border-indigo-600 hover:text-indigo-600 rounded border border-indigo-700 text-indigo-700 px-5 py-1 text-xs" %></span>
+              <span ><%= link "Delete", to: Routes.publisher_path(@conn, :delete, publisher), class: "focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:outline-none mx-2 my-2 bg-white transition duration-150 ease-in-out hover:border-red-600 hover:text-red-600 rounded border border-red-700 text-red-700 px-5 py-1 text-xs", method: :delete, data: [confirm: "Are you sure?"] %></span>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

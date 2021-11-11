@@ -2,13 +2,12 @@ defmodule Default.Title do
 
   import Ecto.Query, warn: false
   alias Default.Repo
-  alias Default.Title.Publisher
-  alias Default.Title.Game
+  alias Default.Title.{Publisher, Game}
 
   def list_publishers(params) do
     word = get_in(params, ["query"])
     Publisher
-    |> Default.Search.Scope.search(word)
+    |> Default.Search.Scope.search_pub(word)
     |> Repo.all()
   end
 
@@ -29,6 +28,12 @@ defmodule Default.Title do
     |> Repo.insert()
   end
 
+  def new(attrs \\ %{}) do
+    %Publisher{}
+    |> Publisher.changeset(attrs)
+    |> Repo.insert()
+  end
+
   def update_publisher(%Publisher{} = publisher, attrs) do
     publisher
     |> Publisher.changeset(attrs)
@@ -44,7 +49,8 @@ defmodule Default.Title do
   end
 
   def list_games do
-    Repo.all(Game)
+    Game
+    |> Repo.all()
   end
 
   def get_game(id), do: Repo.get!(Game, id)
@@ -70,7 +76,7 @@ defmodule Default.Title do
     Game.changeset(game, attrs)
   end
 
-  def create(attrs, id) do
+  def new_game(attrs, id) do
     pub = Repo.get(Publisher, id)
     Ecto.build_assoc(pub, :games, attrs)
     |> Game.changeset(attrs)

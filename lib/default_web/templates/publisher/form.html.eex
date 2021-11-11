@@ -25,5 +25,8 @@
     <div class="px-6 pt-10 flex flex-wrap">
       <%= submit "Save", class: "mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-8 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-indigo-600"%>
     </div>
+    <div class="px-6 pt-10 flex flex-wrap">
+      <%= link "Back", to: Routes.publisher_path(@conn, :index), class: "mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-8 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"%>
+    </div>
   </div>
 <% end %>

@@ -17,7 +17,7 @@ defmodule Default.Title.Publisher do
     |> cast(attrs, [:publisher, :location, :year])
     |> validate_required([:publisher, :location, :year])
     |> validate_inclusion(:year, 1900..2021)
-    |> unique_constraint(:publisher)
     |> validate_length(:publisher, min: 2)
+    |> unique_constraint(:publisher)
   end
 end
