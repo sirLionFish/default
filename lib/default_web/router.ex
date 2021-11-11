@@ -29,6 +29,7 @@ defmodule DefaultWeb.Router do
     resources "/publishers", PublisherController do
       resources "/games", GameController, only: [:create]
     end
+    get "/products", ProductsController, :index
   end
 
   # Other scopes may use custom stacks.

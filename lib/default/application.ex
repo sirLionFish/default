@@ -13,6 +13,8 @@ defmodule Default.Application do
       DefaultWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Default.PubSub},
+      {Websocket.Historical, name: Websocket.Historical},
+      {Websocket.Exchanges.Supervisor, name: Websocket.Exchanges.Supervisor},
       # Start the Endpoint (http/https)
       DefaultWeb.Endpoint
       # Start a worker by calling: Default.Worker.start_link(arg)
