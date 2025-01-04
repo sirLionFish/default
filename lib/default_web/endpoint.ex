@@ -7,12 +7,9 @@ defmodule DefaultWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_default_key",
-    signing_salt: "LEa6AJMZ"
+    signing_salt: "LK0MFaex",
+    same_site: "Lax"
   ]
-
-  socket "/socket", DefaultWeb.UserSocket,
-    websocket: true,
-    longpoll: false
 
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
@@ -24,7 +21,7 @@ defmodule DefaultWeb.Endpoint do
     at: "/",
     from: :default,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: DefaultWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
