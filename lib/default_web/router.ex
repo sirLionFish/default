@@ -20,6 +20,14 @@ defmodule DefaultWeb.Router do
     get "/", PageController, :home
   end
 
+  scope "/", DefaultWeb.Webapp do
+    # pipe_through :browser
+
+    get "/home", HomeController, :index
+    get "/blog", BlogHomeController, :index
+    get "/about", AboutController, :index
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", DefaultWeb do
   #   pipe_through :api
