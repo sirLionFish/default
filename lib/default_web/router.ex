@@ -17,13 +17,13 @@ defmodule DefaultWeb.Router do
   scope "/", DefaultWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    get "/home", PageController, :home
   end
 
   scope "/", DefaultWeb.Webapp do
     # pipe_through :browser
 
-    get "/home", HomeController, :index
+    get "/", HomeController, :index
     get "/blog", BlogHomeController, :index
     get "/about", AboutController, :index
   end
