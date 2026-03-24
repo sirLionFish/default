@@ -1,0 +1,30 @@
+<div class='parallax-background bg-black'>
+  <!-- Animated Purple Sunrise Glow -->
+  <div class='absolute inset-0 flex items-center justify-center'>
+    <div
+      class='w-[66vw] h-[66vw] bg-sunrise-gradient rounded-full animate-sunrise-appear'
+    >
+    </div>
+  </div>
+
+  <!-- Animated Blue Sunrise Glow -->
+  <div class='absolute inset-0 flex items-center justify-center'>
+    <div
+      class='w-[33vw] h-[33vw] bg-sunrise-gradient-blue rounded-full animate-sunrise-appear-blue'
+    >
+    </div>
+  </div>
+</div>
+
+<style>
+  .parallax-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: rgba(128, 128, 128, 0.2); */
+    pointer-events: none;
+  }
+</style>

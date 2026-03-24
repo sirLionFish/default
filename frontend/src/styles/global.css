@@ -38,7 +38,7 @@ body {
 	font-style: normal;
 	font-display: swap;
 }
-/* body {
+body {
 	font-family: 'Atkinson', sans-serif;
 	margin: 0;
 	padding: 0;
@@ -50,7 +50,7 @@ body {
 	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7;
-} */
+}
 main {
 	width: 720px;
 	max-width: calc(100% - 2em);
@@ -160,4 +160,147 @@ hr {
 	clip-path: inset(50%);
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+.nav-button {
+  @apply relative inline-block px-4 py-1 bg-slate-900 border border-white rounded-full text-white font-medium transition-colors duration-300;
+  
+  /* Remove existing inset box-shadows */
+  box-shadow: none;
+
+  /* Optional: Slight background change on hover for better visibility */
+  @apply hover:bg-gray-800;
+}
+
+.nav-button::before {
+  content: '';
+  position: absolute;
+  bottom: 0; /* Aligns the pseudo-element at the bottom of the button */
+  left: 10%; /* Inset from the left to maintain symmetry */
+  width: 90%; /* Extends 80% of the button's width */
+  height: 3px; /* Thickness of the bottom border */
+  
+  /* Smooth transition for dynamic effects (optional) */
+  transition: background-color 0.3s ease, height 0.3s ease;
+}
+
+.nav-button::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; /* Aligns the glow just below the button */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%; /* Keeps the glow width consistent */
+  height: 15%; /* Maintains the glow height */
+  
+  /* Lowered Opacity for Subtle Glow */
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 80%);
+  
+  border-radius: 50%;
+  opacity: 0.6; /* Reduced opacity for a subtler glow */
+  
+  /* Prevent glow from capturing pointer events */
+  pointer-events: none;
+  
+  /* Smooth transition for the glow */
+  transition: opacity 0.3s ease, height 0.3s ease;
+}
+
+/* Optional: Enhance Glow on Hover */
+.nav-button:hover::after {
+  height: 18%; /* Slightly increase glow height on hover */
+	width: 100%;
+  opacity: 0.8; /* Increase opacity for a more prominent glow */
+}
+
+/* Ensure the parent container has relative positioning and hides overflow */
+.container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Adjust the glow element's positioning and z-index */
+.glow-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  z-index: -1;
+}
+
+.fade-in-words {
+  display: inline-block; /* Keep words in one line */
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+.fade-in-word {
+  opacity: 0;
+  transform: translateY(20px);
+  display: inline-block;
+  margin-right: 4px; /* Add spacing between words */
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.marquee-container {
+  overflow: hidden;
+  width: 100%; /* Full width of the container */
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: #f8f9fa; /* Optional background */
+}
+
+.marquee-track {
+  display: flex;
+  gap: 1rem; /* Spacing between cards */
+  animation: marquee infinite linear;
+  will-change: transform; /* Optimize for performance */
+}
+
+.marquee-card {
+  flex: 0 0 auto; /* Prevent shrinking */
+  padding: 1rem 2rem;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  white-space: nowrap; /* Prevent text wrapping */
+  text-align: center;
+}
+
+/* Keyframes for marquee animation */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.parallax-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Ensure it stays in the background */
+  overflow: hidden;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+.relative {
+  position: relative;
+  z-index: 10; /* Ensure content is above the background */
 }

@@ -1,9 +1,23 @@
 ---
-import React from "react"
 import BaseHead from '../components/BaseHead.astro'
-import Header from '../components/Header.astro'
-import Footer from '../components/Footer.astro'
+import Timeline from '../components/Timeline.tsx'
+import TextFadeIn from '../components/TextFadeIn.tsx'
+import HeroHighlight from '../components/Hightlight.tsx'
+import RisenShine from '../components/Rise-n-Shine.astro'
+import Summary from '../components/summary.astro'
+import StickyScrollComponent from '../components/Sticky.tsx'
+import Reaction from '../components/Reaction.astro'
+
+import NavBar from '../components/NavBar.astro'
+import Marquee from '../components/Marquee.tsx'
+import { Tabs } from '../components/Tabs.tsx'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
+
+const tabsData = [
+  { title: 'Tab 1', value: 'tab1', content: '<p>Content for Tab 1</p>' },
+  { title: 'Tab 2', value: 'tab2', content: '<p>Content for Tab 2</p>' },
+  // ... more tabs
+]
 ---
 
 <!doctype html>
@@ -12,63 +26,61 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
-    <Header />
-    <main class='container mx-auto py-16 px-4'>
-      <h1 class='font-bold text-left text-red-600 ml-45'>
-        Welcome to my profile
-      </h1>
-      <section class='bg-brand text-white py-20'>
-        <div class='container mx-auto text-center'>
-          <h1 class='text-5xl font-bold mb-4'>Your AI-Powered Assistant</h1>
-          <p class='text-xl mb-8'>
-            Enhance your coding experience with intelligent suggestions.
-          </p>
-          <a
-            href='#features'
-            class='bg-white text-brand px-6 py-3 rounded-full font-semibold'
-            >Get Started</a
-          >
+    <RisenShine />
+    <div class='relative z-10'>
+      <div
+        class='h-screen flex flex-col items-center justify-center overflow-hidden'
+      >
+        <h1
+          class='md:text-7xl text-3xl lg:text-6xl font-bold text-center text-white'
+        >
+          Build great Product
+        </h1>
+        <NavBar />
+        <Summary />
+      </div>
+      <main class='container mx-auto py-16 px-4'>
+        <Marquee />
+        <div class='sticky top-0 bg-white shadow-md z-10'>
+          <h2 class='text-3xl font-bold text-center py-4'>
+            Professional Experiences
+          </h2>
         </div>
-      </section>
-      <h2>Profile Summary</h2>
-      <p>
-        Self Motivated Fullstack Functional Paradigm Developer with over 4 years
-        of professional experience building scalable web applications, robust
-        backened systems, and distributed architechures. Expertise spans
-        TypeScript, React, Next.js, Phoenix LiveView, Elixir, and Postgres.
-        Proven track record of designing and emplementing effiecient database
-        schema and delivering high-quality, user centric software solutions that
-        drive business value.
-      </p>
-      <h2>Professional Experiences</h2>
-      <ul>
-        <li>International Money Transfer</li>
-        <li>E-commerce</li>
-        <li>Data Security ops & Incident report</li>
-        <li>Distributed System Engineer</li>
-      </ul>
+        <StickyScrollComponent />
+        <Reaction />
 
-      <h2>Tech Stacks Experiences</h2>
-      <ul>
-        <li>Elixir</li>
-        <li>Phoenix LiveView</li>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>TailWind</li>
-        <li>React</li>
-        <li>Next.js</li>
-        <li>Git</li>
-        <li>Github</li>
-        <li>RESTful API</li>
-        <li>Agile Methodologies</li>
-        <li>Data Pipeline</li>
-        <li>C/C++</li>
-        <li>TypeScript</li>
-        <li>JavaScript</li>
-        <li>GCP</li>
-        <li>Postgresql</li>
-      </ul>
-    </main>
-    <Footer />
+        <h2>Tech Stacks Experiences</h2>
+        <ul>
+          <li>Elixir</li>
+          <li>Phoenix LiveView</li>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>TailWind</li>
+          <li>React</li>
+          <li>Next.js</li>
+          <li>Git</li>
+          <li>Github</li>
+          <li>RESTful API</li>
+          <li>Agile Methodologies</li>
+          <li>Data Pipeline</li>
+          <li>C/C++</li>
+          <li>TypeScript</li>
+          <li>JavaScript</li>
+          <li>GCP</li>
+          <li>Postgresql</li>
+        </ul>
+       
+
+
+      </main>
+    </div>
   </body>
 </html>
+
+<Tabs tabs={tabsData} client:load />
+<!-- <HeroHighlight
+      title='Welcome to My Website'
+      subtitle='Building modern web experiences with Astro and React'
+      highlightColor='#6bff6b'
+    /> -->
+<!-- <Footer /> -->

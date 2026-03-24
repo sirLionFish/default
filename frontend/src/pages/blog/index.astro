@@ -1,111 +1,100 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
+import BaseHead from '../../components/BaseHead.astro'
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts'
+import { getCollection } from 'astro:content'
+import FormattedDate from '../../components/FormattedDate.astro'
+import { ClientRouter } from 'astro:transitions'
+import RisenShine from '../../components/Rise-n-Shine.astro'
+import NavBar from '../../components/NavBar.astro'
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+)
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
+<html lang='en'>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <ClientRouter />
+  </head>
+  <body>
+    <RisenShine />
+    <div class='w-full h-[45vh] flex justify-center items-center'>
+      <NavBar />
+    </div>
+    <div class='flex flex-row items-start justify-center w-2/3 mx-auto'>
+      <!-- Controller starts here -->
+      <div class='px-10 py-12 bg-white mx-auto rounded-l-xl'>
+        <div>
+          <p class='text-4xl font-semibold text-center text-gray-800'>
+            Control what you see
+          </p>
+          <hr class='border-gray-200 border w-full mt-4 mb-6' />
+          <div class='px-6'>
+            <div class='block' id='togleOne'>
+              <div class='flex lg:gap-20 md:gap-10 gap-6'>
+                <div class='flex justify-start gap-4 mt-4 items-center'>
+                  <input
+                    type='radio'
+                    name='radio'
+                    id=''
+                    class='accent-gray-800 w-4 h-4 cursor-pointer'
+                  />
+                  <p class='text-gray-600 font-normal text-base'>Frontend</p>
+                </div>
+
+                <div class='flex justify-start gap-4 mt-4 items-center'>
+                  <input
+                    type='radio'
+                    name='radio'
+                    id=''
+                    class='accent-gray-800 w-4 h-4 cursor-pointer'
+                  />
+                  <p class='text-gray-600 font-normal text-base'>Backend</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Contents starts here -->
+      <blog>
+        <ul class='px-8'>
+          {
+            posts.map((post) => (
+              <li>
+                <a href={`/blog/${post.id}/`}>
+                  <div class='bg-gray-800 shadow rounded-lg mt-3 flex relative z-30'>
+                    <div class='w-2.5 h-auto bg-indigo-700 rounded-tl-md rounded-bl-md' />
+                    <div class='rounded-lg pt-4 pl-4 pr-4'>
+                        {/* <img width={720} height={360} src={post.data.heroImage} /> */}
+                        <h4 class='text-2xl font-semibold text-white'>
+                          {post.data.title}
+                        </h4>
+                        <p class='text-gray-200 text-base border-b border-gray-300'>
+                          {post.data.description}
+                        </p>
+                        <div class=''>
+                          <div class=''>
+                            <div>
+                              <h1 class='text-base text-gray-200 font-semibold'>
+                                Tag
+                              </h1>
+                              <p>
+                                <FormattedDate date={post.data.pubDate} />
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </blog>
+    </div>
+    <main transition:animate='initial'></main>
+  </body>
 </html>
